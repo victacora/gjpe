@@ -19,7 +19,7 @@
       <ion-item>
         <ion-select label="Tipo" label-placement="floating" placeholder="Seleccione el tipo de vehiculo"
           [(ngModel)]="nuevoVehiculo.tipoId">
-          <ion-select-option *ngFor="let t of tipoVehiculo" [value]="t.id">{{ t.tipo }}</ion-select-option>
+          <ion-select-option *ngFor="let t of tipoVehiculos | async" [value]="t.id">{{ t.tipo }}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Vehiculo } from '../vehiculo';
+import { VehiculosService } from '../services/vehiculos.service';
 
 @Component({
   selector: 'app-vehiculos',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VehiculosPage implements OnInit {
 
-  constructor() { }
+  vehiculos !: Observable<Vehiculo[]>;
+
+  constructor( private vehiculosService: VehiculosService) { }
 
   ngOnInit() {
+    this.vehiculos = this.vehiculosService.getVehiculos();
   }
 
 }
