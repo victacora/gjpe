@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { Vehiculo } from '../vehiculo';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
@@ -25,13 +25,36 @@ export class VehiculosService {
     );
   }
 
-  crearNuevo(vehiculo:Vehiculo){
+  crearNuevo(vehiculo: Vehiculo) {
     console.log(vehiculo);
     return this.vehiculosCollection.add(vehiculo);
   }
 
   getVehiculos(): Observable<Vehiculo[]> {
     return this.vehiculos;
+  }
+
+  borrar(vehiculo: Vehiculo) {
+    this.afs.doc(`vehiculos/${vehiculo}`).delete().then(() => {
+      console.log("Vehiculo eliminado " + vehiculo);
+    }).catch(err => { console.error(err) });
+  }
+
+  getVehiculo(id: string): Observable<Vehiculo> {
+    return this.vehiculosCollection.doc<Vehiculo>(id).valueChanges().pipe(take(1), map(
+      vehiculo => {
+        if(vehiculo) vehiculo.id = id;
+        return vehiculo!;
+      }));
+  }
+
+  editarVehiculo(vehiculo: Vehiculo) {
+    return this.vehiculosCollection.doc(vehiculo.id).update({
+      placa: vehiculo.placa,
+      anio: vehiculo.anio,
+      marca: vehiculo.marca,
+      color: vehiculo.color
+    });
   }
 
 }

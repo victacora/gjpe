@@ -16,7 +16,7 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list>
-    <ion-item *ngFor="let v of vehiculos | async">
+    <ion-item *ngFor="let v of vehiculos | async" (click)="seleccionarVehiculo(v)">
       <ion-label>
         <h2>{{v.placa}} {{v.anio}} {{v.marca}} {{v.color}}</h2>
       </ion-label>
