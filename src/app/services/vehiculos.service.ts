@@ -35,7 +35,7 @@ export class VehiculosService {
   }
 
   borrar(vehiculo: Vehiculo) {
-    this.afs.doc(`vehiculos/${vehiculo}`).delete().then(() => {
+    this.afs.doc(`vehiculos/${vehiculo.id}`).delete().then(() => {
       console.log("Vehiculo eliminado " + vehiculo);
     }).catch(err => { console.error(err) });
   }
