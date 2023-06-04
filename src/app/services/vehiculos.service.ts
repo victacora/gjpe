@@ -26,7 +26,7 @@ export class VehiculosService {
   }
 
   crearNuevo(vehiculo: Vehiculo) {
-    console.log(vehiculo);
+    console.log('nuevo',vehiculo);
     return this.vehiculosCollection.add(vehiculo);
   }
 
@@ -34,8 +34,8 @@ export class VehiculosService {
     return this.vehiculos;
   }
 
-  borrar(vehiculo: Vehiculo) {
-    this.afs.doc(`vehiculos/${vehiculo.id}`).delete().then(() => {
+  borrar(vehiculo: any) {
+    this.afs.doc(`vehiculos/${vehiculo}`).delete().then(() => {
       console.log("Vehiculo eliminado " + vehiculo);
     }).catch(err => { console.error(err) });
   }

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Vehiculo } from '../vehiculo';
 import { VehiculosService } from '../services/vehiculos.service';
 import { ActionSheetController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehiculos',
@@ -13,7 +14,7 @@ export class VehiculosPage implements OnInit {
 
   vehiculos !: Observable<Vehiculo[]>;
 
-  constructor(private vehiculosService: VehiculosService, private actionSheetController: ActionSheetController, private alertController: AlertController) { }
+  constructor(private vehiculosService: VehiculosService, private actionSheetController: ActionSheetController, private alertController: AlertController, private router: Router) { }
 
   ngOnInit() {
     this.vehiculos = this.vehiculosService.getVehiculos();
@@ -26,13 +27,13 @@ export class VehiculosPage implements OnInit {
           text: "Borrar vehiculo",
           role: "destructive",
           handler: () => {
-            this.borrarVehiculo(vehiculo);
+            this.borrarVehiculo(vehiculo.id);
           }
         },
         {
           text: "Modificar vehiculo",
           handler: () => {
-
+            this.editar(vehiculo.id);
           }
         },
         {
@@ -72,5 +73,9 @@ export class VehiculosPage implements OnInit {
       }]
     });
     (await alert).present();
+  }
+
+  async editar(vehiculo: any) {
+    this.router.navigate(["tabs/editarvehiculo", vehiculo]);
   }
 }

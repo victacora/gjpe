@@ -17,9 +17,9 @@
         <ion-input type="text" name="placa" [(ngModel)]="nuevoVehiculo.placa" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-select label="Tipo" label-placement="floating" placeholder="Seleccione el tipo de vehiculo"
-          [(ngModel)]="nuevoVehiculo.tipoId">
-          <ion-select-option *ngFor="let t of tipoVehiculos | async" [value]="t.id">{{ t.tipo }}</ion-select-option>
+        <ion-select label="Tipo"  cancelText="Cancelar" okText="Seleccionar"  (ionChange)="setTipo($event)" label-placement="floating" placeholder="Seleccione el tipo de vehiculo">
+          <ion-select-option value="Moto">Moto</ion-select-option>
+          <ion-select-option value="Carro">Carro</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>

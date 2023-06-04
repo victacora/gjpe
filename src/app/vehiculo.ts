@@ -1,7 +1,7 @@
 export interface Vehiculo{
     id: string; 
     placa: string;
-    tipoId: string; 
+    tipo: string; 
     anio: string;
     color: string;
     marca: string;
