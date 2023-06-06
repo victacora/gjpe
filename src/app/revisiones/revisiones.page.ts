@@ -78,7 +78,7 @@ export class RevisionesPage implements OnInit {
       }, {
         text: "Si",
         handler: () => {
-          this.RevisionesService.BorrarRevision(revision);
+          this.RevisionesService.BorrarRevision(revision.id);
         }
       }]
     });
