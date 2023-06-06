@@ -37,7 +37,7 @@ export class NuevarevisionPage implements OnInit {
 
   nueva_revision(nuevaRevision: revision) {
     this.RevisionService.CrearRevision(nuevaRevision).then(() => {
-      this.router.navigate(['tabs/nuevarevision', this.idVehiculo]);
+      this.router.navigate(['tabs/revisionesvehiculo', this.idVehiculo]);
       this.mostrarMensaje("Revision registrada");
       this.nuevaRevision = {} as revision;
     }, err => {
