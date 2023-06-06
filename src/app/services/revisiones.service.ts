@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, take } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
-import { revision} from '../revision';
+import { revision } from '../revision';
 import { RevisionesPageModule } from '../revisiones/revisiones.module';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class RevisionesService {
     this.revisionesCollection = this.afs.collection<revision>('revisiones');
     var snap = this.revisionesCollection.snapshotChanges();
     console.log(snap);
-    this.revisiones= this.revisionesCollection.snapshotChanges().pipe(
+    this.revisiones = this.revisionesCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -31,7 +31,14 @@ export class RevisionesService {
     return this.revisionesCollection.add(revision);
   }
 
- GetRevisiones(): Observable<revision[]> {
+  GetRevisiones(idVehiculo: string): Observable<revision[]> {
+    this.revisiones = this.afs.collection<revision>('revisiones', ref => ref.where('idVehiculo', '==', idVehiculo)).snapshotChanges().pipe(map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { ...data, id };
+      });
+    }));
     return this.revisiones;
   }
 
@@ -41,22 +48,23 @@ export class RevisionesService {
     }).catch(err => { console.error(err) });
   }
 
-  GetRevision(id: string): Observable<revision | undefined>{
+  GetRevision(id: string): Observable<revision | undefined> {
     return this.revisionesCollection.doc<revision>(id).valueChanges().pipe(
       map(revision => {
-      return revision
+        return revision
       })
     );
   }
 
- EditarRevision(revision: revision, id:any): Promise<void>{
+  EditarRevision(revision: revision, id: any): Promise<void> {
     return this.revisionesCollection.doc(id).update(
-      { fecha: revision.fecha,
+      {
+        fecha: revision.fecha,
         descripcion: revision.descripcion,
         repuestos: revision.repuestos,
         valorTotal: revision.valorTotal,
         mecanico: revision.mecanico,
-        Taller: revision.Taller,
+        taller: revision.taller,
       });
   }
 

@@ -14,14 +14,14 @@
     <ion-item *ngFor="let revisionItem of  (Revisiones | async)" (click)="seleccionarrevision(revisionItem.id)">
       <ion-label>
         <p><strong>Fecha</strong> {{revisionItem.fecha}}
-          <strong>Taller:</strong> {{revisionItem.Taller}}
+          <strong>Taller:</strong> {{revisionItem.taller}}
           <strong>Mecanico:</strong> {{revisionItem.mecanico}}
         </p>
       </ion-label>
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/tabs/nuevarevision" routerDirection="forward">
+    <ion-fab-button (click)="nuevaRevision()" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -3,9 +3,10 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 
-import { revision} from '../revision';
+import { revision } from '../revision';
 import { RevisionesService } from '../services/revisiones.service';
 import { RevisionesPageModule } from '../revisiones/revisiones.module';
+import { Vehiculo } from '../vehiculo';
 
 @Component({
   selector: 'app-nuevarevision',
@@ -15,6 +16,7 @@ import { RevisionesPageModule } from '../revisiones/revisiones.module';
 export class NuevarevisionPage implements OnInit {
 
   nuevaRevision = {} as revision;
+  idVehiculo: string = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -27,13 +29,16 @@ export class NuevarevisionPage implements OnInit {
 
   ngOnInit() {
     console.log('El componente de Nueva Revision se ha inicializado.');
+    this.route.params.forEach((params: any) => {
+      this.idVehiculo = params['id'];
+      this.nuevaRevision.idVehiculo= this.idVehiculo;
+    });
   }
 
-  nueva_revision(nuevaRevision: any) {
-    this.mostrarMensaje('Guardando...');
-    this.RevisionService.CrearRevision(this.nuevaRevision).then(() => {
-      this.router.navigateByUrl('/tabs/revisiones');
-      this.mostrarMensaje("Reision registrada");
+  nueva_revision(nuevaRevision: revision) {
+    this.RevisionService.CrearRevision(nuevaRevision).then(() => {
+      this.router.navigate(['tabs/nuevarevision', this.idVehiculo]);
+      this.mostrarMensaje("Revision registrada");
       this.nuevaRevision = {} as revision;
     }, err => {
       this.mostrarMensaje("Ocurrio un error.");

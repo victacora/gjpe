@@ -24,7 +24,7 @@ const routes: Routes = [
         loadChildren: () => import('../revisiones/revisiones.module').then(m => m.RevisionesPageModule)
       },
       {
-        path: 'nuevarevision',
+        path: 'nuevarevision/:id',
         loadChildren: () => import('../nuevarevision/nuevarevision.module').then(m => m.NuevarevisionPageModule)
       }
     ]

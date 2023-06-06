@@ -13,7 +13,7 @@ import { RevisionesService } from '../services/revisiones.service';
 })
 export class RevisionesPage implements OnInit {
   public Revisiones!: Observable<revision[]>;
-  id: string = "";
+  idVehiculo: string = "";
   constructor(
     private RevisionesService: RevisionesService,
     private actionSheetController: ActionSheetController,
@@ -24,9 +24,9 @@ export class RevisionesPage implements OnInit {
 
   ngOnInit() {
     this.route.params.forEach((params: any) => {
-      this.id = params['id'];
+      this.idVehiculo = params['id'];
       console.log('El componente de Revisiones se ha inicializado.');
-      this.Revisiones = this.RevisionesService.GetRevisiones();
+      this.Revisiones = this.RevisionesService.GetRevisiones(this.idVehiculo);
     });
   }
 
@@ -48,12 +48,6 @@ export class RevisionesPage implements OnInit {
               alert("Modificara la revision");//revisar funcionalidad
               this.editarrevision(revision);
             }
-          },
-          {
-            text: "Gestionar revisiones",
-            handler: () => {
-
-            }
           }, {
             text: "Cancelar",
             role: "cancel",
@@ -65,6 +59,7 @@ export class RevisionesPage implements OnInit {
       });
     await actionSheet.present();
   }
+
   editarrevision(revision: any) {
     throw new Error('Method not implemented.');
   }
@@ -90,8 +85,7 @@ export class RevisionesPage implements OnInit {
     await alert.present();
   }
 
-  /* async editarrevision(revision: any) {
-     this.router.navigate(['tabs/editarvehiculo', revision]);
-   }*/
-
+  async nuevaRevision() {
+    this.router.navigate(['tabs/nuevarevision', this.idVehiculo]);
+  }
 }

@@ -5,5 +5,6 @@ export interface revision{
   repuestos: string;
   valorTotal: string;
   mecanico: string;
-  Taller: string;
+  taller: string;
+  idVehiculo: string;
 }
