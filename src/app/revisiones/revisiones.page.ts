@@ -39,7 +39,7 @@ export class RevisionesPage implements OnInit {
             text: "Borrar Revision",
             role: "destructive",
             handler: () => {
-              this.borrarrevision(revision);
+              this.borrarrevision(revision.id);
             }
           },
           {
@@ -78,7 +78,7 @@ export class RevisionesPage implements OnInit {
       }, {
         text: "Si",
         handler: () => {
-          this.RevisionesService.BorrarRevision(revision.id);
+          this.RevisionesService.BorrarRevision(revision);
         }
       }]
     });

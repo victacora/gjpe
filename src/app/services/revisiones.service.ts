@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, map, take } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { revision } from '../revision';
-import { RevisionesPageModule } from '../revisiones/revisiones.module';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +42,8 @@ export class RevisionesService {
   }
 
   BorrarRevision(revision: any) {
-    this.afs.doc(`revision/${revision}`).delete().then(() => {
-      console.log(`Reision Eliminada: "${revision}"`);
+    this.afs.doc(`revisiones/${revision}`).delete().then(() => {
+      console.log(`Revision Eliminada: "${revision}"`);
     }).catch(err => { console.error(err) });
   }
 
