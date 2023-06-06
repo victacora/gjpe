@@ -39,7 +39,7 @@ export class VehiculosPage implements OnInit {
         {
           text: "Gestionar revisiones",
           handler: () => {
-
+            this.revisiones(vehiculo.id);
           }
         }, {
           text: "Cancelar",
@@ -77,5 +77,9 @@ export class VehiculosPage implements OnInit {
 
   async editar(vehiculo: any) {
     this.router.navigate(["tabs/editarvehiculo", vehiculo]);
+  }
+
+  async revisiones(vehiculo: any) {
+    this.router.navigate(["tabs/revisionesvehiculo", vehiculo]);
   }
 }

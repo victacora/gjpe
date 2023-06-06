@@ -17,7 +17,15 @@ const routes: Routes = [
   {
     path: 'editarvehiculo',
     loadChildren: () => import('./editarvehiculo/editarvehiculo.module').then( m => m.EditarvehiculoPageModule)
-  }
+  },
+  {
+    path: 'revisionesvehiculo',
+    loadChildren: () => import('./revisiones/revisiones.module').then( m => m.RevisionesPageModule)
+  },
+  {
+    path: 'nuevarevision',
+    loadChildren: () => import('./nuevarevision/nuevarevision.module').then( m => m.NuevarevisionPageModule)
+  },
 ];
 @NgModule({
   imports: [
